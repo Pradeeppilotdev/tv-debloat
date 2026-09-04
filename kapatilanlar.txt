@@ -1,0 +1,65 @@
+# Disabled packages - Xiaomi Mi TV 4A Horizon Edition
+# Date: 2026-09-04
+
+# Batch 1 - Top RAM hogs + telemetry + recommendations
+co.sensara.tv.mitv
+com.google.android.katniss
+com.google.android.tvrecommendations
+com.miui.tv.analytics
+com.google.android.tungsten.setupwraith
+
+# Batch 2 - Unused streaming apps + dead launcher code
+com.amazon.amazonvideo.livingroom
+com.google.android.videos
+com.sonyliv
+com.google.android.leanbacklauncher.recommendations
+com.google.android.leanbacklauncher
+
+# Batch 3 - More streaming junk + backdrop + statistics
+in.startv.hotstar
+com.google.android.youtube.tvmusic
+com.google.android.play.games
+com.google.android.backdrop
+com.xiaomi.statistic
+
+# Batch 4 - Screensavers + hardware apps TV doesn't have
+com.mitv.dream
+com.android.dreams.basic
+com.android.camera2
+com.android.printspooler
+com.android.smspush
+
+# Batch 5 - Unused galleries + bloatware + bug reporter
+com.android.gallery3d
+com.mitv.gallery
+com.xiaomi.mitv.handbook
+com.xiaomo.tv.milegal
+com.google.android.tv.bugreportsender
+
+# Batch 6 - Dead initializers + feedback + wallpaper utilities
+com.google.android.feedback
+com.google.android.onetimeinitializer
+com.android.onetimeinitializer
+com.android.wallpapercropper
+com.android.wallpaperbackup
+
+# Batch 7 - Web content + HTML viewer + stubs + floating frame + partner setup
+com.xm.webcontent
+com.android.htmlviewer
+com.google.android.tv.frameworkpackagestubs
+com.xiaomi.floatingframe
+com.google.android.partnersetup
+
+# Batch 8 - Netflix + TalkBack + PatchWall home + Mi Video + Smartshare
+com.netflix.ninja
+com.google.android.marvin.talkback
+com.mitv.tvhome.atv
+com.mitv.videoplayer
+com.xiaomi.mitv.smartshare
+
+# Batch 9 - MiLink + Mi Music
+com.mitv.milinkservice
+com.xiaomi.mimusic2
+
+# Home screen replacement
+com.google.android.tvlauncher
