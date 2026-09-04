@@ -22,7 +22,7 @@ language as you go.
 
 MY TV
 - Make / model: FILL THIS IN            (example: Xiaomi Mi TV 4A Horizon Edition)
-- TV's IP address: FILL THIS IN         (TV > Settings > Device Preferences > About > Status)
+- TV's IP address: FILL THIS IN         (Settings > About > Status — or — Settings > Network & internet > Wi-Fi > IP address)
 - TV has PatchWall (Xiaomi's launcher) installed, but I may be using Android TV's
   stock launcher. Confirm the active launcher with:
   `dumpsys activity activities | grep mResumedActivity`
@@ -124,7 +124,9 @@ WHEN YOU ARE DONE, GIVE ME
 4. Enable **both** of these (the second one is Xiaomi-specific and required for ADB over Wi-Fi):
    - **USB debugging**
    - **MiTV ADB debugging** ← without this, `adb connect` will fail silently on Xiaomi TVs
-5. Note your TV's IP address: **Settings** > **Device Preferences** > **About** > **Status** > **IP address**
+5. Note your TV's IP address — either:
+   - **Settings** > **Device Preferences** > **About** > **Status** > **IP address**, or
+   - **Settings** > **Network & internet** > **Wi-Fi** (connected network) > **IP address**
 
 ## Step 2 — Connect from your computer
 
