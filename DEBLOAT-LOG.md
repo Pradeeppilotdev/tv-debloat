@@ -22,7 +22,9 @@ A complete guide to removing bloatware, ads, and recommendation rows from Xiaomi
 1. Go to **Settings** > **Device Preferences** > **About**
 2. Scroll to **Build** and press OK on the remote **7 times** rapidly. This enables Developer Options.
 3. Go back to **Settings** > **Device Preferences** > **Developer Options**
-4. Turn on **USB debugging** (sometimes labeled "ADB debugging")
+4. Enable **both** of these (the second one is Xiaomi-specific and required for ADB over Wi-Fi):
+   - **USB debugging**
+   - **MiTV ADB debugging** ← without this, `adb connect` will fail silently on Xiaomi TVs
 5. Note your TV's IP address: **Settings** > **Device Preferences** > **About** > **Status** > **IP address**
 
 ## Step 2 — Connect from your computer
@@ -235,3 +237,9 @@ The package names in the "Telemetry", "Recommendation Engines", "Unused Streamin
 ## License
 
 Do whatever you want with this. If it helps you, share it forward.
+
+---
+
+## Credits
+
+This guide was initially inspired by [tv.cobanov.dev](https://tv.cobanov.dev/) — a comprehensive resource for debloating Android TVs via ADB. That site is where the core concept came from; this guide extends it with Xiaomi/PatchWall-specific package names, small-batch safety methodology, and the FLauncher home screen replacement.
