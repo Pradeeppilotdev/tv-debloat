@@ -1,10 +1,10 @@
-# Debloat Xiaomi Mi TV via ADB — No Root Required
+# Debloat Any Android TV via ADB — No Root Required
 
-A complete guide to removing bloatware, ads, and recommendation rows from Xiaomi Android TVs using ADB. Tested on a **Mi TV 4A Horizon Edition** (1 GB RAM / 8 GB storage), but the package names and approach work on any Xiaomi/PatchWall TV running Android TV.
+A complete guide to removing bloatware, ads, and recommendation rows from Android TVs using ADB. Works on **Xiaomi, TCL, Hisense, Sony, Philips**, and any TV running Android TV or Google TV.
 
-> **Why this guide?** Most debloat guides online target TCL or generic Android TVs. Xiaomi TVs ship with PatchWall, Sensara ad-tracking, and a stack of pre-installed Indian streaming apps — all eating RAM on already resource-constrained hardware. This guide identifies the actual Xiaomi package names and disables them safely in small batches.
+Tested on a **Xiaomi Mi TV 4A Horizon Edition** (1 GB RAM / 8 GB storage), but the approach, AI prompt, and most package names are universal. Xiaomi-specific packages are clearly labeled.
 
-> **Inspired by [tv.cobanov.dev](https://tv.cobanov.dev/)** — the original Android TV debloat prompt for AI agents. That site uses TCL package names; this guide adapts the concept for Xiaomi/PatchWall TVs.
+> **Why this guide?** Most debloat guides either target one specific brand or are too generic to be safe. This guide provides a **copy-paste AI agent prompt** that works for any Android TV (the agent discovers your TV's packages automatically), plus a manual reference with both universal and brand-specific package lists.
 
 ---
 
@@ -158,7 +158,7 @@ adb shell pm list packages -d       # already disabled packages
 - NEVER disable: Play Services, Play Store, remote service, Bluetooth, keyboard, TV input, location fused, or the active launcher.
 - Test after each batch: Does the **remote's Source/Input button** work? Can you **switch to HDMI**? Does **YouTube** open? Does **sound** work? Does the **on-screen keyboard** appear?
 
-### Safe to disable — Telemetry & Ad Tracking
+### Safe to disable — Telemetry & Ad Tracking (Xiaomi-specific)
 
 | Package | What it is |
 |---------|-----------|
@@ -166,7 +166,7 @@ adb shell pm list packages -d       # already disabled packages
 | `com.miui.tv.analytics` | MIUI telemetry sending data to Xiaomi |
 | `com.xiaomi.statistic` | Xiaomi usage statistics collector |
 
-### Safe to disable — Recommendation Engines (the ad rows)
+### Safe to disable — Recommendation Engines (universal — all Android TVs)
 
 | Package | What it is |
 |---------|-----------|
@@ -175,7 +175,7 @@ adb shell pm list packages -d       # already disabled packages
 | `com.google.android.leanbacklauncher.recommendations` | Old Leanback recommendations (dead code) |
 | `com.google.android.leanbacklauncher` | Old Leanback launcher (unused) |
 
-### Safe to disable — Unused Streaming Apps
+### Safe to disable — Unused Streaming Apps (universal — check what's on your TV)
 
 | Package | What it is |
 |---------|-----------|
@@ -189,7 +189,7 @@ adb shell pm list packages -d       # already disabled packages
 
 > **Note:** These can be re-installed from the Play Store anytime. Only disable apps you don't use.
 
-### Safe to disable — Screensavers, Dead Code & Bloatware
+### Safe to disable — Screensavers, Dead Code & Bloatware (universal — all Android TVs)
 
 | Package | What it is |
 |---------|-----------|
@@ -204,7 +204,7 @@ adb shell pm list packages -d       # already disabled packages
 | `com.google.android.tv.bugreportsender` | Bug report sender |
 | `com.google.android.feedback` | Google feedback |
 
-### Safe to disable — Hardware Apps TV Doesn't Have
+### Safe to disable — Hardware Apps TV Doesn't Have (universal — all Android TVs)
 
 | Package | What it is |
 |---------|-----------|
@@ -212,7 +212,9 @@ adb shell pm list packages -d       # already disabled packages
 | `com.android.printspooler` | Print spooler — TV has no printer |
 | `com.android.smspush` | SMS push — TV has no SMS |
 
-### Safe to disable — Unused Xiaomi Apps
+### Safe to disable — Unused Xiaomi Apps (Xiaomi/PatchWall-specific)
+
+> **Other brands?** TCL has `com.tcl.*`, Hisense has `com.hisense.*`, Sony has `com.sony.*`. Run `adb shell pm list packages | grep <brand>` to find yours.
 
 | Package | What it is |
 |---------|-----------|
@@ -241,6 +243,10 @@ adb shell pm list packages -d       # already disabled packages
 
 ### NEVER disable these
 
+These are **universal across all Android TV brands**. The brand-specific ones (TCL, Xiaomi, Hisense, etc.) are listed after.
+
+**Universal (all brands):**
+
 | Package | Why |
 |---------|-----|
 | `com.google.android.gms` | Play Services — everything depends on it |
@@ -250,13 +256,29 @@ adb shell pm list packages -d       # already disabled packages
 | `com.google.android.inputmethod.latin` | On-screen keyboard |
 | `com.google.android.tv.remote.service` | Remote control |
 | `com.android.bluetooth` | Bluetooth (remote pairing) |
-| `com.droidlogic.tvinput` | HDMI / antenna input |
-| `com.droidlogic` | Core TV firmware |
 | `com.android.tv` | Android TV framework |
 | `com.android.systemui` | System UI |
 | `com.google.android.apps.mediashell` | Chromecast / Google Cast (keep if you cast from phone) |
 | `com.google.android.youtube.tv` | YouTube (keep if you watch) |
-| `org.videolan.vlc` | VLC (keep if you use it) |
+
+**Xiaomi / DroidLogic:**
+
+| Package | Why |
+|---------|-----|
+| `com.droidlogic.tvinput` | HDMI / antenna input |
+| `com.droidlogic` | Core TV firmware |
+
+**TCL:**
+
+| Package | Why |
+|---------|-----|
+| `com.tcl.suspension` | Inputs/Source menu — disabling it kills HDMI switching |
+| `com.tcl.tv` | HDMI / antenna input |
+| `com.tcl.tvinput` | HDMI / antenna input |
+| `com.tcl.tcl_bt_rcu_service` | Remote control |
+| `com.tcl.autopair` | Remote auto-pairing |
+
+> **Not sure what a package does?** Run `adb shell dumpsys package <package.name>` to see its permissions and activities, or ask your AI agent before disabling it.
 
 ## Step 5 — Replace the home screen (optional)
 
@@ -329,7 +351,7 @@ adb shell pm enable com.netflix.ninja
 - **Storage:** 8 GB
 - **Date:** September 2026
 
-The package names in the "Telemetry", "Recommendation Engines", "Unused Streaming", and "Xiaomi Apps" sections are Xiaomi-specific. Other brands (TCL, Hisense, Sony) will have different package names — run `adb shell pm list packages` on your TV to find yours.
+The **AI prompt** works on any Android TV brand — it discovers packages automatically. The **manual package tables** below are split into universal (all brands) and Xiaomi-specific sections. For other brands, the agent in the prompt will find the equivalents, or run `adb shell pm list packages` to list everything on your TV.
 
 ---
 
